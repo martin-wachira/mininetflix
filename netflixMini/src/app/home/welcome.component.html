@@ -1,0 +1,368 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark maroon" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="#">
+        <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix logo">
+    </a>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a style="color: green" (click)="moveToLogin()">Sign in</a> &nbsp;
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" mdbWavesEffect type="button"
+                    mdbBtn rounded="true" data-toggle="modal" data-target="#basicExample" (click)="frame.show()"
+                    mdbWavesEffect>Sign Up</button>
+
+                <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+                    aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <!--Content-->
+                        <div class="modal-content form-elegant">
+                            <!--Header-->
+                            <div class="modal-header text-center">
+                                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel">
+                                    <strong>Sign Up</strong>
+                                </h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    (click)="frame.hide()">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!--Body-->
+                            <div class="modal-body mx-4">
+                                <!--Body-->
+
+                                <form [formGroup]="validatingForm">
+                                    <div class="md-form form-sm">
+                                        <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                                        <input style="color: rgb(126, 93, 93)" type="text" id="Form-username1"
+                                            formControlName="username" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-username1">Username</label>
+                                        <mdb-error *ngIf="username.invalid && (username.dirty || username.touched)">
+                                            Input invalid
+                                        </mdb-error>
+                                        <!-- <mdb-success *ngIf="username.valid && (username.dirty || username.touched)">
+                                        Input valid
+                                    </mdb-success> -->
+                                    </div>
+
+
+                                    <div class="md-form form-sm">
+                                        <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+                                        <input type="email" style="color: rgb(126, 93, 93)" id="Form-email1"
+                                            formControlName="email" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-email1">Email</label>
+                                        <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                                            Input invalid
+                                        </mdb-error>
+
+                                    </div>
+
+                                    <div class="md-form form-sm">
+                                        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                                        <input type="password" style="color: rgb(126, 93, 93)" id="Form-pass1"
+                                            formControlName="password" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-pass1">Your password</label>
+                                        <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                                            Input invalid
+                                        </mdb-error>
+
+                                    </div>
+
+                                    <!-- <div class="md-form form-sm">
+                                        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                                        <input type="password" style="color: rgb(126, 93, 93)" formControlName="cnfpass" class="form-control" mdbInput mdbValidate>
+                                        <label for="form23">Confirm</label>
+                                        <mdb-error>
+                                            Input invalid
+                                        </mdb-error>
+                                        <mdb-success *ngIf="cnfpass.valid && (cnfpass.dirty || cnfpass.touched)">
+                                            Input valid
+                                        </mdb-success>
+                                        <p class="font-small blue-text d-flex justify-content-end">Forgot
+                                            <a href="#" class="blue-text ml-1"> Password?</a>
+                                        </p>
+                                </div> -->
+
+                                    <div class="md-form form-sm">
+
+                                        <mdb-success>
+                                            {{successMessage}}
+                                        </mdb-success>
+                                    </div>
+
+                                    <div class="text-center mb-3">
+                                        <button type="button" mdbBtn gradient="blue" block="true" rounded="true"
+                                            class="z-depth-1a waves-light" mdbWavesEffect color="success"
+                                            (click)="register()">Sign up
+                                        </button>
+                                    </div>
+
+                                </form>
+
+
+                                <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
+                                    or Sign in
+                                    with:</p>
+
+                                <div class="row my-3 d-flex justify-content-center">
+                                    <!--Facebook-->
+                                    <button type="button" mdbBtn color="white" rounded="true"
+                                        class="mr-md-3 z-depth-1a waves-light" mdbWavesEffect>
+                                        <mdb-icon fab icon="facebook-f" class="text-center"></mdb-icon>
+                                    </button>
+                                    <!--Twitter-->
+                                    <button type="button" mdbBtn color="white" rounded="true"
+                                        class="mr-md-3 z-depth-1a waves-light" mdbWavesEffect>
+                                        <mdb-icon fab icon="twitter"></mdb-icon>
+                                    </button>
+                                    <!--Google +-->
+                                    <button type="button" mdbBtn color="white" rounded="true"
+                                        class="z-depth-1a waves-light" mdbWavesEffect>
+                                        <mdb-icon fab icon="google-plus"></mdb-icon>
+                                    </button>
+                                </div>
+                                <!--Footer-->
+                                <div class="modal-footer mx-5 pt-3 mb-1">
+                                    <p class="font-small grey-text d-flex justify-content-end">Already have an Account?
+                                        <a class="blue-text ml-1" (click)="moveToLogin()"> Sign In</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.Content-->
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+        <!-- Links -->
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+
+
+<!--Introductory Card with image Gotham @author=wcr-->
+<mdb-card cascade="true" wider="true" reverse="true" class="my-4">
+
+    <div class="view view-cascade" mdbWavesEffect>
+        <mdb-card-img src="/assets/images/gotham.jpg" height="200px"></mdb-card-img>
+        <a>
+            <div class="mask rgba-black"></div>
+        </a>
+    </div>
+
+
+
+    <mdb-card-body cascade="true" class="text-center rgba-black">
+
+        <!--Title-->
+        <mdb-card-title>
+            <h4>
+                <strong>All of Mini Netflix</strong>
+            </h4>
+        </mdb-card-title>
+
+        <h5 class="green-text">
+            <strong>Create a free account to Enjoy Full Features of Mini Netflix</strong>
+        </h5>
+
+        <mdb-card-text>
+            We believe in users' satisfaction and that's why we created this JUST for YOU!
+        </mdb-card-text>
+        <button mdbBtn type="button" color="danger" rounded="true" outline="true" mdbWavesEffect type="button" mdbBtn
+            rounded="true" data-toggle="modal" data-target="#basicExample" (click)="frame.show()" mdbWavesEffect>Sign
+            Up</button>
+        <br>
+        <!--Linkedin-->
+        <a class="px-2 icons-sm li-ic">
+            <mdb-icon fab icon="linkedin-in"> </mdb-icon>
+        </a>
+        <!--Twitter-->
+        <a class="px-2 icons-sm tw-ic">
+            <mdb-icon fab icon="twitter"> </mdb-icon>
+        </a>
+        <!--Dribbble-->
+        <a class="px-2 icons-sm fb-ic">
+            <mdb-icon fab icon="facebook-f"> </mdb-icon>
+        </a>
+    </mdb-card-body>
+
+</mdb-card>
+
+<hr>
+<table mdbTable striped="true">
+    <thead class="btn-success">
+        <tr>
+            <th scope="col">Title </th>
+            <th scope="col">Author</th>
+            <th scope="col">Plot </th>
+            <th scope="col">Description</th>
+            <th scope="col">Director</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Language</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr mdbTableCol *ngFor="let movie of filteredMovies">
+            <!-- <th scope="row">{{el.id}}</th> -->
+            <td>Fuck! I'm sick</td>
+            <td>{{movie.title}}</td>
+            <td>{{movie.author}}</td>
+            <td>{{movie.plot}}</td>
+            <td>{{movie.description}}</td>
+            <td>{{movie.director}}</td>
+            <td>{{movie.releaseDate}}</td>
+            <td>{{movie.genre}}</td>
+            <td>{{movie.language}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<!--Card Holding all Movies @author = wcr -->
+<div class="row">
+    <div class="col-md-4">
+        <!--Card-->
+        <mdb-card cascade="true" wider="true">
+
+            <!--Card image-->
+            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/People/6-col/img%20%283%29.jpg">
+                </mdb-card-img>
+                <a>
+                    <div class="mask rgba-black-slight"></div>
+                </a>
+            </div> -->
+            <!--/Card image-->
+
+            <mdb-card-body cascade="true" class="text-center">
+                <!--Card content-->
+                <!--Title-->
+                <h4 class="card-title">
+                    <strong>{{movies.title}}</strong>
+                </h4>
+                <h5 class="indigo-text">
+                    <strong>Photographer</strong>
+                </h5>
+
+                <mdb-card-text>
+                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
+                    rem
+                    aperiam.
+                </mdb-card-text>
+
+                <!--Linkedin-->
+                <a class="px-2 icons-sm li-ic">
+                    <mdb-icon fab icon="linkedin-in"> </mdb-icon>
+                </a>
+                <!--Twitter-->
+                <a class="px-2 icons-sm tw-ic">
+                    <mdb-icon fab icon="twitter"> </mdb-icon>
+                </a>
+                <!--Dribbble-->
+                <a class="px-2 icons-sm fb-ic">
+                    <mdb-icon fab icon="facebook-f"> </mdb-icon>
+                </a>
+
+            </mdb-card-body>
+            <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+    </div>
+
+    <div class="col-md-4">
+        <!--Card-->
+        <mdb-card cascade="true" narrower="true">
+
+            <!--Card image-->
+            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg">
+                </mdb-card-img>
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div> -->
+            <!--/Card image-->
+
+            <mdb-card-body cascade="true" class="text-center">
+                <!--Card content-->
+                <h5 class="pink-text">
+                    <mdb-icon fas icon="utensils"></mdb-icon> Culinary
+                </h5>
+                <!--Title-->
+                <h4 class="card-title">Cheat day inspirations</h4>
+                <!--Text-->
+
+                <mdb-card-text>
+                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
+                    rem
+                    aperiam.
+                </mdb-card-text>
+
+                <a mdbBtn color="unique" class="waves-light" mdbWavesEffect>Button</a>
+
+            </mdb-card-body>
+            <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+    </div>
+
+    <div class="col-md-4">
+        <!--Card-->
+        <mdb-card cascade="true">
+
+            <!--Card image-->
+            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/men.jpg"></mdb-card-img>
+                <a>
+                    <div class="mask rgba-white-slight"></div>
+                </a>
+            </div> -->
+            <!--/Card image-->
+
+            <mdb-card-body cascade="true" class="text-center">
+                <!--Card content-->
+                <h4 class="card-title">
+                    <strong>Billy Cullen</strong>
+                </h4>
+                <h5>Web developer</h5>
+
+                <mdb-card-text>
+                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
+                    rem
+                    aperiam.
+                </mdb-card-text>
+
+                <!--Facebook-->
+                <a type="button" mdbBtn floating="true" size="sm" color="fb" class="waves-light" mdbWavesEffect>
+                    <mdb-icon fab icon="facebook-f"></mdb-icon>
+                </a>
+                <!--Twitter-->
+                <a type="button" mdbBtn floating="true" size="sm" color="tw" class="waves-light" mdbWavesEffect>
+                    <mdb-icon fab icon="twitter"></mdb-icon>
+                </a>
+                <!--Google +-->
+                <a type="button" mdbBtn floating="true" size="sm" color="dribbble" class="waves-light" mdbWavesEffect>
+                    <mdb-icon fab icon="dribbble"></mdb-icon>
+                </a>
+
+            </mdb-card-body>
+            <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+    </div>
+</div>
+
+
+
+<br>
+<br>
