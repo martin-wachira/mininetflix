@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 import { AppComponent } from './app.component';
@@ -16,6 +16,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { MovieComponent } from './movies/movie.component';
 import { LoginComponent } from './login/login.component';
 import { FavoriteComponent } from './favorite/favorite.component';
+import { FilterPipe } from './movies/filter.pipe';
 
 
 
@@ -26,7 +27,8 @@ import { FavoriteComponent } from './favorite/favorite.component';
     WelcomeComponent,
     MovieComponent,
     LoginComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -37,6 +39,7 @@ import { FavoriteComponent } from './favorite/favorite.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireDatabaseModule,
+    FormsModule,
     HttpClientModule
   ],
   providers: [],

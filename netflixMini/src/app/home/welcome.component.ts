@@ -33,17 +33,17 @@ export class WelcomeComponent implements OnInit {
 
   errorMessage = '';
 
-  _listFilter: string;
-  get listFilter(): string {
-    return this._listFilter;
-  }
+  // _listFilter: string;
+  // get listFilter(): string {
+  //   return this._listFilter;
+  // }
 
-  set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredMovies = this.listFilter ? this.performFilter(this.listFilter) : this.movies;
-  }
+  // set listFilter(value: string) {
+  //   this._listFilter = value;
+  //   this.filteredMovies = this.listFilter ? this.performFilter(this.listFilter) : this.movies;
+  // }
 
-  filteredMovies: IMovie[];
+  // filteredMovies: IMovie[];
   movies: IMovie[] = [];
 
   private validationMessages = {
@@ -56,11 +56,11 @@ export class WelcomeComponent implements OnInit {
     private a_route: ActivatedRoute,
     private db: AngularFirestore) {}
 
-  performFilter(filterBy: string): IMovie[] {
-    filterBy = filterBy.toLocaleLowerCase();
-    return this.movies.filter((movie: IMovie) =>
-      movie.title.toLocaleLowerCase().indexOf(filterBy) !== -1);
-  }
+  // performFilter(filterBy: string): IMovie[] {
+  //   filterBy = filterBy.toLocaleLowerCase();
+  //   return this.movies.filter((movie: IMovie) =>
+  //     movie.title.toLocaleLowerCase().indexOf(filterBy) !== 0);
+  // }
 
   ngOnInit() {
     this.validatingForm = this.fb.group({
@@ -71,12 +71,20 @@ export class WelcomeComponent implements OnInit {
     
     this.service.getAllMovies()
     .subscribe(data => {
-      this.filteredMovies = data.map(e => {
+      this.movies = data.map(e => {
         return {
           ...e.payload.doc.data()
         } as IMovie;
       })
     })
+
+    // this.service.getAllMovies().subscribe({
+    //   next: movies => {
+    //     this.movies = movies
+    //     this.movies = this.movies;
+    //   },
+    //   error: err => this.errorMessage = err
+    // });
 
   }
 

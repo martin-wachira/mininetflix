@@ -13,13 +13,12 @@
 
     &nbsp; &nbsp;
     <li class="nav-item pull-right">
-        <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search">
+        <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText">
     </li>
-    <a class="nav-link" style="margin-top: 10px;">Search</a>
+    <!-- <a class="nav-link" style="margin-top: 10px;">Search</a> -->
 </ul>
 </div>
 
-    <!-- Collapsible content -->
     <links>
 
         <!-- Links -->
@@ -155,17 +154,16 @@
         </ul>
         <!-- Links -->
     </links>
-    <!-- Collapsible content -->
 
 </mdb-navbar>
 
 <div class="row">
-    <div class="col-md-4" *ngFor="let item of filteredMovies">
+    <div class="col-md-4" *ngFor="let item of movies | filter:searchText">
         <!--Card-->
         <mdb-card cascade="true" wider="true">
 
             <!-- Card image-->
-            <div class="view view-cascade overlay waves-light"  style="height: 350px;" mdbWavesEffect>
+            <div class="view view-cascade overlay waves-light"  style="height: 250px;" mdbWavesEffect>
                 <mdb-card-img [src]='item.imgUrl'>
                 </mdb-card-img>
                 <a>
