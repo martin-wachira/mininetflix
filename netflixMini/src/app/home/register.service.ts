@@ -3,30 +3,26 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { IMovie } from './../movies/movie';
 import { catchError, tap, map } from 'rxjs/operators';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
 
-  // errMess: any = 'Some Errors';
+  private dbPath = '/movies';
+  moviesRef: AngularFireList<IMovie> = null;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, public fs: AngularFirestore, private db: AngularFireDatabase) {
+    this.moviesRef = db.list(this.dbPath);
+   }
 
 
-  // getMovies(): Observable<IMovie[]> {
-  //   return this.http.get<IMovie[]>('/movies')
-  //   .pipe(
-  //     tap(data => console.log('All: ' + JSON.stringify(data))),
-  //     catchError(this.handleError)
-  //   );
-  // }
-
-    getMovies() {
-    return this.http.get('http://localhost:3000/movies');
-  }
-
-  
+  getAllMovies(){
+    return this.fs.collection('movies').snapshotChanges();
+  }  
 
   private handleError(err: HttpErrorResponse){
     let errorMessage = '';

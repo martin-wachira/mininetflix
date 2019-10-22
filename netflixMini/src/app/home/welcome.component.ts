@@ -3,6 +3,8 @@ import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/fo
 import { RegisterService } from './register.service';
 import { ActivatedRoute, Router } from '@angular/router'
 import { IMovie } from '../movies/movie';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { map } from 'rxjs/operators';
 
 
 function passMatch(c: AbstractControl): { [key: string]: boolean } | null {
@@ -33,12 +35,12 @@ export class WelcomeComponent implements OnInit {
   errorMessage = '';
 
   _listFilter: string;
-  get listFilter(): string{
+  get listFilter(): string {
     return this._listFilter;
   }
 
-  set listFilter(value:string){
-    this._listFilter=value;
+  set listFilter(value: string) {
+    this._listFilter = value;
     this.filteredMovies = this.listFilter ? this.performFilter(this.listFilter) : this.movies;
   }
 
@@ -47,39 +49,36 @@ export class WelcomeComponent implements OnInit {
 
   private validationMessages = {
     required: 'Please enter your password.',
-    // email: 'Please enter a valid email address.'
   };
 
   constructor(private fb: FormBuilder,
     private service: RegisterService,
     private router: Router,
-    private a_route: ActivatedRoute) { }
+    private a_route: ActivatedRoute,
+    private db: AngularFirestore) {}
 
-    performFilter(filterBy: string): IMovie[]{
-      filterBy = filterBy.toLocaleLowerCase();
-      return this.movies.filter((movie: IMovie) => 
-        movie.title.toLocaleLowerCase().indexOf(filterBy) !== -1);
-    }
+  performFilter(filterBy: string): IMovie[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.movies.filter((movie: IMovie) =>
+      movie.title.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
 
   ngOnInit() {
     this.validatingForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
-      // cnfpass: ['', Validators.required]
     });
-
-    this.service.getMovies().subscribe((data: IMovie[]) => {
-      this.movies = data;
+    
+    this.service.getAllMovies()
+    .subscribe(data => {
+      this.filteredMovies = data.map(e => {
+        return {
+          ...e.payload.doc.data()
+        } as IMovie;
+      })
     })
 
-    // this.service.getMovies().subscribe({
-    //   next: movies => {
-    //     this.movies = movies
-    //     this.filteredMovies = this.movies;
-    //   },
-    //   error: err => this.errorMessage = err
-    // });
   }
 
   setMessage(c: AbstractControl): void {

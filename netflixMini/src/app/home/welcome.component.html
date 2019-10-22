@@ -207,160 +207,77 @@
             <th scope="col">Release Date</th>
             <th scope="col">Genre</th>
             <th scope="col">Language</th>
+            <th scope="col">Producer</th>
         </tr>
     </thead>
-    <tbody>
-        <tr mdbTableCol *ngFor="let movie of filteredMovies">
+    <tbody> 
+        <tr mdbTableCol  *ngFor="let item of filteredMovies" style="color: green;">
             <!-- <th scope="row">{{el.id}}</th> -->
-            <td>Fuck! I'm sick</td>
-            <td>{{movie.title}}</td>
-            <td>{{movie.author}}</td>
-            <td>{{movie.plot}}</td>
-            <td>{{movie.description}}</td>
-            <td>{{movie.director}}</td>
-            <td>{{movie.releaseDate}}</td>
-            <td>{{movie.genre}}</td>
-            <td>{{movie.language}}</td>
+            <!-- <td>Fuck! I'm sick</td> -->
+            <td>{{item.title}}</td>
+            <td>{{item.author}}</td>
+            <td>{{item.plot}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.producer}}</td>
+            <td>{{item.releaseDate}}</td>
+            <td>{{item.genre}}</td>
+            <td>{{item.language}}</td>
+            <td>{{item.director}}</td>
+            <!-- <td>{{item.title}}</td> -->
         </tr>
     </tbody>
 </table>
 
 <!--Card Holding all Movies @author = wcr -->
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" *ngFor="let item of filteredMovies">
         <!--Card-->
         <mdb-card cascade="true" wider="true">
 
-            <!--Card image-->
-            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/People/6-col/img%20%283%29.jpg">
+            <!-- Card image-->
+            <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+                <mdb-card-img [src]='item.imgUrl'>
                 </mdb-card-img>
                 <a>
                     <div class="mask rgba-black-slight"></div>
                 </a>
-            </div> -->
-            <!--/Card image-->
+            </div>
+            <!--/Card image -->
 
             <mdb-card-body cascade="true" class="text-center">
                 <!--Card content-->
                 <!--Title-->
                 <h4 class="card-title">
-                    <strong>{{movies.title}}</strong>
+                    <strong></strong>
                 </h4>
                 <h5 class="indigo-text">
-                    <strong>Photographer</strong>
+                    <strong>{{item.title}}</strong>
                 </h5>
 
                 <mdb-card-text>
-                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
-                    rem
-                    aperiam.
+                    
+                  <ul>
+                      <li>
+                            {{item.title}}
+                      </li>
+                      <li>
+                            {{item.releaseDate}}
+                      </li>
+                      <li>
+                            {{item.director}}
+                      </li>
+                  </ul>
                 </mdb-card-text>
-
-                <!--Linkedin-->
-                <a class="px-2 icons-sm li-ic">
-                    <mdb-icon fab icon="linkedin-in"> </mdb-icon>
-                </a>
-                <!--Twitter-->
-                <a class="px-2 icons-sm tw-ic">
-                    <mdb-icon fab icon="twitter"> </mdb-icon>
-                </a>
-                <!--Dribbble-->
-                <a class="px-2 icons-sm fb-ic">
-                    <mdb-icon fab icon="facebook-f"> </mdb-icon>
-                </a>
 
             </mdb-card-body>
             <!--/.Card content-->
 
         </mdb-card>
         <!--/.Card-->
-    </div>
-
-    <div class="col-md-4">
-        <!--Card-->
-        <mdb-card cascade="true" narrower="true">
-
-            <!--Card image-->
-            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(147).jpg">
-                </mdb-card-img>
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <!--/Card image-->
-
-            <mdb-card-body cascade="true" class="text-center">
-                <!--Card content-->
-                <h5 class="pink-text">
-                    <mdb-icon fas icon="utensils"></mdb-icon> Culinary
-                </h5>
-                <!--Title-->
-                <h4 class="card-title">Cheat day inspirations</h4>
-                <!--Text-->
-
-                <mdb-card-text>
-                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
-                    rem
-                    aperiam.
-                </mdb-card-text>
-
-                <a mdbBtn color="unique" class="waves-light" mdbWavesEffect>Button</a>
-
-            </mdb-card-body>
-            <!--/.Card content-->
-
-        </mdb-card>
-        <!--/.Card-->
-    </div>
-
-    <div class="col-md-4">
-        <!--Card-->
-        <mdb-card cascade="true">
-
-            <!--Card image-->
-            <!-- <div class="view view-cascade overlay waves-light" mdbWavesEffect>
-                <mdb-card-img src="https://mdbootstrap.com/img/Photos/Others/men.jpg"></mdb-card-img>
-                <a>
-                    <div class="mask rgba-white-slight"></div>
-                </a>
-            </div> -->
-            <!--/Card image-->
-
-            <mdb-card-body cascade="true" class="text-center">
-                <!--Card content-->
-                <h4 class="card-title">
-                    <strong>Billy Cullen</strong>
-                </h4>
-                <h5>Web developer</h5>
-
-                <mdb-card-text>
-                    Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam
-                    rem
-                    aperiam.
-                </mdb-card-text>
-
-                <!--Facebook-->
-                <a type="button" mdbBtn floating="true" size="sm" color="fb" class="waves-light" mdbWavesEffect>
-                    <mdb-icon fab icon="facebook-f"></mdb-icon>
-                </a>
-                <!--Twitter-->
-                <a type="button" mdbBtn floating="true" size="sm" color="tw" class="waves-light" mdbWavesEffect>
-                    <mdb-icon fab icon="twitter"></mdb-icon>
-                </a>
-                <!--Google +-->
-                <a type="button" mdbBtn floating="true" size="sm" color="dribbble" class="waves-light" mdbWavesEffect>
-                    <mdb-icon fab icon="dribbble"></mdb-icon>
-                </a>
-
-            </mdb-card-body>
-            <!--/.Card content-->
-
-        </mdb-card>
-        <!--/.Card-->
-    </div>
+    </div>    
 </div>
+
 
 
 
