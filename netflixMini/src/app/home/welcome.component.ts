@@ -6,7 +6,6 @@ import { IMovie } from '../movies/movie';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
-
 function passMatch(c: AbstractControl): { [key: string]: boolean } | null {
   const passwordControl = c.get('password');
   const confirmControl = c.get('cnfpass');

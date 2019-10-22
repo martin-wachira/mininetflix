@@ -5,6 +5,19 @@
     <a class="navbar-brand" href="#">
         <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix logo">
     </a>
+<div class="row">
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <button mdbBtn type="button" color="danger" rounded="true">Favorites</button>
+    </li>
+
+    &nbsp; &nbsp;
+    <li class="nav-item pull-right">
+        <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search">
+    </li>
+    <a class="nav-link" style="margin-top: 10px;">Search</a>
+</ul>
+</div>
 
     <!-- Collapsible content -->
     <links>
@@ -146,97 +159,13 @@
 
 </mdb-navbar>
 
-
-<!--Introductory Card with image Gotham @author=wcr-->
-<mdb-card cascade="true" wider="true" reverse="true" class="my-4">
-
-    <div class="view view-cascade" mdbWavesEffect>
-        <mdb-card-img src="/assets/images/gotham.jpg" height="200px"></mdb-card-img>
-        <a>
-            <div class="mask rgba-black"></div>
-        </a>
-    </div>
-
-
-
-    <mdb-card-body cascade="true" class="text-center rgba-black">
-
-        <!--Title-->
-        <mdb-card-title>
-            <h4>
-                <strong>All of Mini Netflix</strong>
-            </h4>
-        </mdb-card-title>
-
-        <h5 class="green-text">
-            <strong>Create a free account to Enjoy Full Features of Mini Netflix</strong>
-        </h5>
-
-        <mdb-card-text>
-            We believe in users' satisfaction and that's why we created this JUST for YOU!
-        </mdb-card-text>
-        <button mdbBtn type="button" color="danger" rounded="true" outline="true" mdbWavesEffect type="button" mdbBtn
-            rounded="true" data-toggle="modal" data-target="#basicExample" (click)="frame.show()" mdbWavesEffect>Sign
-            Up</button>
-        <br>
-        <!--Linkedin-->
-        <a class="px-2 icons-sm li-ic">
-            <mdb-icon fab icon="linkedin-in"> </mdb-icon>
-        </a>
-        <!--Twitter-->
-        <a class="px-2 icons-sm tw-ic">
-            <mdb-icon fab icon="twitter"> </mdb-icon>
-        </a>
-        <!--Dribbble-->
-        <a class="px-2 icons-sm fb-ic">
-            <mdb-icon fab icon="facebook-f"> </mdb-icon>
-        </a>
-    </mdb-card-body>
-
-</mdb-card>
-
-<hr>
-<table mdbTable striped="true">
-    <thead class="btn-success">
-        <tr>
-            <th scope="col">Title </th>
-            <th scope="col">Author</th>
-            <th scope="col">Plot </th>
-            <th scope="col">Description</th>
-            <th scope="col">Director</th>
-            <th scope="col">Release Date</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Language</th>
-            <th scope="col">Producer</th>
-        </tr>
-    </thead>
-    <tbody> 
-        <tr mdbTableCol  *ngFor="let item of filteredMovies" style="color: green;">
-            <!-- <th scope="row">{{el.id}}</th> -->
-            <!-- <td>Fuck! I'm sick</td> -->
-            <td>{{item.title}}</td>
-            <td>{{item.author}}</td>
-            <td>{{item.plot}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.producer}}</td>
-            <td>{{item.releaseDate}}</td>
-            <td>{{item.genre}}</td>
-            <td>{{item.language}}</td>
-            <td>{{item.director}}</td>
-            <!-- <td>{{item.title}}</td> -->
-        </tr>
-    </tbody>
-</table>
-
-<!--Card Holding all Movies @author = wcr -->
-
 <div class="row">
     <div class="col-md-4" *ngFor="let item of filteredMovies">
         <!--Card-->
         <mdb-card cascade="true" wider="true">
 
             <!-- Card image-->
-            <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+            <div class="view view-cascade overlay waves-light"  style="height: 350px;" mdbWavesEffect>
                 <mdb-card-img [src]='item.imgUrl'>
                 </mdb-card-img>
                 <a>
@@ -270,6 +199,8 @@
                   </ul>
                 </mdb-card-text>
 
+                <button mdbBtn type="button" color="danger" rounded="true" (click)="likeMovie(item)">like</button>
+
             </mdb-card-body>
             <!--/.Card content-->
 
@@ -277,9 +208,3 @@
         <!--/.Card-->
     </div>    
 </div>
-
-
-
-
-<br>
-<br>
