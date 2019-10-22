@@ -13,8 +13,6 @@ export class RegisterService {
 
   private dbPath = '/movies';
   moviesRef: AngularFireList<IMovie> = null;
-  favItem: FirebaseListObservable<any[]>;
-
 
   constructor(private http: HttpClient, public fs: AngularFirestore, private db: AngularFireDatabase) {
     this.moviesRef = db.list(this.dbPath);
@@ -57,7 +55,7 @@ export class RegisterService {
     
   }
 
-  likeMovie(item){
-    this.favItem.push(item);
-  }
+  // likeMovie(item){
+  //   this.favItem.push(item);
+  // }
 }
