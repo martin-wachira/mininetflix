@@ -1,65 +1,72 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
-
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark maroon" [containerInside]="false">
     <!-- Navbar brand -->
-    <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
-
-    <!-- Collapsible content -->
-    <links>
-
-        <!-- Links -->
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-            </li>
+    <a class="navbar-brand" href="#">
+        <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix logo">
+    </a>
+    <div class="row">
+        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+                <button mdbBtn type="button" color="danger" rounded="true">Favorites</button>
             </li>
 
-            <!-- Search form -->
-            <!-- <form class="form-inline waves-light" mdbWavesEffect> -->
-                <a class="nav-link waves-light" mdbWavesEffect>Search By: </a>
-            <li class="nav-item active">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            &nbsp; &nbsp;
+            <li class="nav-item pull-right">
+                <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search"
+                    [(ngModel)]="searchText">
             </li>
-            <!-- </form> -->
+            <!-- <a class="nav-link" style="margin-top: 10px;">Search</a> -->
         </ul>
-
-
-        <!-- Links -->
-
-
-        <ul class="navbar-nav ml-auto nav-flex-icons">
-            <li class="nav-item">
-                <a class="nav-link">
-                    <mdb-icon fab icon="twitter"></mdb-icon>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link">
-                    <mdb-icon fab icon="google-plus"></mdb-icon>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link">
-                    <div class="btn-group" mdbDropdown>
-                        <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-primary">
-                            <a class="dropdown-item">{{username}}</a>
-                            <a class="dropdown-item">{{email}}</a>
-                            <a class="dropdown-item" (click)="logout()">Logout</a>
-                        </div>
-                    </div>
-                </a>
-            </li>
-        </ul>
-
-    </links>
-    <!-- Collapsible content -->
+    </div>
 
 </mdb-navbar>
-<!--/.Navbar-->
+
+<div class="row">
+    <div class="col-md-4" *ngFor="let item of movies | filter:searchText">
+        <!--Card-->
+        <mdb-card cascade="true" wider="true">
+
+            <!-- Card image-->
+            <div class="view view-cascade overlay waves-light" style="height: 250px;" mdbWavesEffect>
+                <mdb-card-img [src]='item.imgUrl'>
+                </mdb-card-img>
+                <a>
+                    <div class="mask rgba-black-slight"></div>
+                </a>
+            </div>
+            <!--/Card image -->
+
+            <mdb-card-body cascade="true" class="text-center">
+                <!--Card content-->
+                <!--Title-->
+                <h4 class="card-title">
+                    <strong></strong>
+                </h4>
+                <h5 class="indigo-text">
+                    <strong>{{item.title}}</strong>
+                </h5>
+
+                <mdb-card-text>
+
+                    <ul>
+                        <li>
+                            {{item.title}}
+                        </li>
+                        <li>
+                            {{item.releaseDate}}
+                        </li>
+                        <li>
+                            {{item.director}}
+                        </li>
+                    </ul>
+                </mdb-card-text>
+
+                <button mdbBtn type="button" color="danger" rounded="true" (click)="likeMovie(item)">like</button>
+
+            </mdb-card-body>
+            <!--/.Card content-->
+
+        </mdb-card>
+        <!--/.Card-->
+    </div>
+</div>

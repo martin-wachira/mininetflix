@@ -2,22 +2,23 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark maroon" [containerInside]="false">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand">
         <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix logo">
     </a>
-<div class="row">
-<ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-        <button mdbBtn type="button" color="danger" rounded="true">Favorites</button>
-    </li>
+    <div class="row">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <button mdbBtn type="button" color="danger" rounded="true" (click)="gotoFav()">Favorites</button>
+            </li>
 
-    &nbsp; &nbsp;
-    <li class="nav-item pull-right">
-        <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search" [(ngModel)]="searchText">
-    </li>
-    <!-- <a class="nav-link" style="margin-top: 10px;">Search</a> -->
-</ul>
-</div>
+            &nbsp; &nbsp;
+            <li class="nav-item pull-right">
+                <input style="margin-top: 10px;" class="form-control" type="text" placeholder="Search"
+                    [(ngModel)]="searchText">
+            </li>
+            <!-- <a class="nav-link" style="margin-top: 10px;">Search</a> -->
+        </ul>
+    </div>
 
     <links>
 
@@ -163,10 +164,10 @@
         <mdb-card cascade="true" wider="true">
 
             <!-- Card image-->
-            <div class="view view-cascade overlay waves-light"  style="height: 250px;" mdbWavesEffect>
-                <mdb-card-img [src]='item.imgUrl'>
-                </mdb-card-img>
-                <a>
+            <div class="view view-cascade overlay waves-light" style="height: 250px;" mdbWavesEffect>
+                <a [routerLink]="[ '/movie', item.documentId ]">
+                    <mdb-card-img [src]='item.imgUrl'>
+                    </mdb-card-img>
                     <div class="mask rgba-black-slight"></div>
                 </a>
             </div>
@@ -183,26 +184,28 @@
                 </h5>
 
                 <mdb-card-text>
-                    
-                  <ul>
-                      <li>
+
+                    <ul>
+                        <li>
                             {{item.title}}
-                      </li>
-                      <li>
+                        </li>
+                        <li>
                             {{item.releaseDate}}
-                      </li>
-                      <li>
+                        </li>
+                        <li>
                             {{item.director}}
-                      </li>
-                  </ul>
+                        </li>
+                    </ul>
                 </mdb-card-text>
 
-                <button mdbBtn type="button" color="danger" rounded="true" (click)="likeMovie(item)">like</button>
+                <button mdbBtn type="button" color="danger" rounded="true" (click)="toggleLike()">
+                    {{showLike ? 'Like' : 'Like'}}
+                </button>
 
             </mdb-card-body>
             <!--/.Card content-->
 
         </mdb-card>
         <!--/.Card-->
-    </div>    
+    </div>
 </div>

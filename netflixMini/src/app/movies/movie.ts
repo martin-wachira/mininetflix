@@ -13,10 +13,9 @@
 //    rating: number;
 //    imageUrl: string;
 // }
-
-
 export interface IMovie{
-   Id: number;
+  data: any;
+   documentId: number;
    title: string;
    author: string;
    director: string;

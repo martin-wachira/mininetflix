@@ -19,9 +19,21 @@ export class RegisterService {
    }
 
 
-  getAllMovies(){
+  getAllMovies(): Observable<any>{
     return this.fs.collection('movies').snapshotChanges();
-  }  
+  }
+
+  // getMovie = (documentId: number) => {
+  //   return this.fs.collection('movies').doc().get();//..snapshotChanges();
+  //  } 
+  
+  getMovie(documentId: number): Observable<IMovie | undefined>{
+    return this.getAllMovies()
+    .pipe(
+        map((movies: IMovie[]) => movies.find(m => m.documentId === documentId))
+    );
+  }
+
 
   private handleError(err: HttpErrorResponse){
     let errorMessage = '';

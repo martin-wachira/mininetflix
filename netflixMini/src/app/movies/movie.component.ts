@@ -1,3 +1,5 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { RegisterService } from './../home/register.service';
 import { MovieService } from './movie.service';
 import { Component, OnInit } from '@angular/core';
 import { IMovie } from './movie';
@@ -8,25 +10,28 @@ import { IMovie } from './movie';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
-  Id: number;
-  movieTitle: string = "";
-  author: string = "";
-  director: string = "";
-  // awards: number = null;
-  // language: string = "";
-  // genre: string = "";
-  // plot: string= "";
-  // releaseDate: string = "";
-  // description: string = ""; 
-  // rating: number = null;
-  // imageUrl: string = "";
+  movie: IMovie;
+  // movieDetails: any;
 
-  movies: IMovie[] = [];
-
-  constructor(private service: MovieService) { }
+  constructor(private service: RegisterService, private a_route: ActivatedRoute, private router: Router) { }
 
 
   ngOnInit() {
+
+    let param = this.a_route.snapshot.paramMap.get('documentId');
+    if (param){
+      const documentId = +param;
+      this.getMovie(documentId);
+    }
+    
   }
+
+  getMovie(documentId: number) {
+    this.service.getMovie(documentId).subscribe({
+      next: movie => this.movie = movie
+      // error: err => this.errorMessage = err
+    });
+  }
+
 
 }

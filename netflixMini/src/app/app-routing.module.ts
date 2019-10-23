@@ -1,3 +1,4 @@
+import { MovieComponent } from './movies/movie.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +10,8 @@ const routes: Routes = [
   { path: 'register', component: WelcomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'favorite', component: FavoriteComponent },
+  { path: 'movie', component: MovieComponent },
+  { path: 'movie/:documentId ', component: MovieComponent },
   // { path: '', redirectTo: 'register', pathMatch: 'full' },
   { path: '**', redirectTo: 'register', pathMatch: 'full' }
 

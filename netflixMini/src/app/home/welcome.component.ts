@@ -30,6 +30,7 @@ export class WelcomeComponent implements OnInit {
   successMessage = '';
   validatingForm: FormGroup;
   passMessage: string;
+  showLike: boolean = false;
 
   errorMessage = '';
 
@@ -45,6 +46,7 @@ export class WelcomeComponent implements OnInit {
 
   // filteredMovies: IMovie[];
   movies: IMovie[] = [];
+  movieDetails: any;
 
   private validationMessages = {
     required: 'Please enter your password.',
@@ -78,14 +80,6 @@ export class WelcomeComponent implements OnInit {
       })
     })
 
-    // this.service.getAllMovies().subscribe({
-    //   next: movies => {
-    //     this.movies = movies
-    //     this.movies = this.movies;
-    //   },
-    //   error: err => this.errorMessage = err
-    // });
-
   }
 
   setMessage(c: AbstractControl): void {
@@ -94,6 +88,10 @@ export class WelcomeComponent implements OnInit {
       this.passMessage = Object.keys(c.errors).map(
         key => this.validationMessages[key]).join(' ');
     }
+  }
+
+  toggleLike(): void {
+    this.showLike = !this.showLike; 
   }
 
   register() {
@@ -110,6 +108,10 @@ export class WelcomeComponent implements OnInit {
 
   moveToLogin() {
     this.router.navigate(['../login'], { relativeTo: this.a_route });
+  }
+
+  gotoFav() {
+    this.router.navigate(['../favorite'], { relativeTo: this.a_route });
   }
 
   get username() {
