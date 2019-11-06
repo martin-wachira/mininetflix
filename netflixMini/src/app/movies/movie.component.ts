@@ -21,7 +21,6 @@ export class MovieComponent implements OnInit {
       const id = param;
       this.getMovie(id);
     }
-
   }
 
   getMovie(id: string) {
@@ -30,5 +29,4 @@ export class MovieComponent implements OnInit {
     });
   }
 
-  
 }

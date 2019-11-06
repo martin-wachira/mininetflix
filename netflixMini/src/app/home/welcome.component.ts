@@ -4,7 +4,6 @@ import { RegisterService } from './register.service';
 import { ActivatedRoute, Router } from '@angular/router'
 import { IMovie } from '../movies/movie';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-welcome',
@@ -42,18 +41,9 @@ export class WelcomeComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-    
-    // this.service.getAllMovies()
-    // .subscribe(data => {
-    //   this.movies = data.map(e => {
-    //     return {
-    //       ...e.payload.doc.data()
-    //     } as IMovie;
-    //   })
-    // })
+
 
     this.service.getAllMovies().subscribe(movies => {
-      // console.log(movies);
       this.movies = movies;
     })
 
