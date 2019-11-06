@@ -159,19 +159,20 @@
 </mdb-navbar>
 
 <div class="row">
-    <div class="col-md-4" *ngFor="let item of movies | filter:searchText">
+    <div class="col-md-4" *ngFor="let movie of movies | filter:searchText">
         <!--Card-->
         <mdb-card cascade="true" wider="true">
 
             <!-- Card image-->
             <div class="view view-cascade overlay waves-light" style="height: 250px;" mdbWavesEffect>
-                <a [routerLink]="[ '/movie', item.documentId ]">
-                    <mdb-card-img [src]='item.imgUrl'>
+                <!-- <a [routerLink]="[ '/movie', movie.id ]"> -->
+                <a (click)="gotoDetails(movie.id)">
+                    <mdb-card-img [src]='movie.imgUrl'>
                     </mdb-card-img>
                     <div class="mask rgba-black-slight"></div>
                 </a>
             </div>
-            <!--/Card image -->
+            
 
             <mdb-card-body cascade="true" class="text-center">
                 <!--Card content-->
@@ -180,20 +181,20 @@
                     <strong></strong>
                 </h4>
                 <h5 class="indigo-text">
-                    <strong>{{item.title}}</strong>
+                    <strong>{{movie.title}}</strong>
                 </h5>
 
                 <mdb-card-text>
-
+                
                     <ul>
                         <li>
-                            {{item.title}}
+                            {{movie.title}}
                         </li>
                         <li>
-                            {{item.releaseDate}}
+                            {{movie.releaseDate}}
                         </li>
                         <li>
-                            {{item.director}}
+                            {{movie.director}}
                         </li>
                     </ul>
                 </mdb-card-text>

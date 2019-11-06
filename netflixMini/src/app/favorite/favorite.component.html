@@ -22,14 +22,14 @@
 </mdb-navbar>
 
 <div class="row">
-    <div class="col-md-4" *ngFor="let item of movies | filter:searchText">
+    <div class="col-md-4">
         <!--Card-->
         <mdb-card cascade="true" wider="true">
 
             <!-- Card image-->
             <div class="view view-cascade overlay waves-light" style="height: 250px;" mdbWavesEffect>
-                <mdb-card-img [src]='item.imgUrl'>
-                </mdb-card-img>
+                <!-- <mdb-card-img [src]='item.imgUrl'>
+                </mdb-card-img> -->
                 <a>
                     <div class="mask rgba-black-slight"></div>
                 </a>
@@ -43,12 +43,12 @@
                     <strong></strong>
                 </h4>
                 <h5 class="indigo-text">
-                    <strong>{{item.title}}</strong>
+                    <!-- <strong>{{item.title}}</strong> -->
                 </h5>
 
                 <mdb-card-text>
 
-                    <ul>
+                    <!-- <ul>
                         <li>
                             {{item.title}}
                         </li>
@@ -58,10 +58,10 @@
                         <li>
                             {{item.director}}
                         </li>
-                    </ul>
+                    </ul> -->
                 </mdb-card-text>
 
-                <button mdbBtn type="button" color="danger" rounded="true" (click)="likeMovie(item)">like</button>
+                <!-- <button mdbBtn type="button" color="danger" rounded="true" (click)="likeMovie(item)">like</button> -->
 
             </mdb-card-body>
             <!--/.Card content-->

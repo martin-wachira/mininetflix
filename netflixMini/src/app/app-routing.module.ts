@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'favorite', component: FavoriteComponent },
   { path: 'movie', component: MovieComponent },
-  { path: 'movie/:documentId ', component: MovieComponent },
+  { path: 'movie/:id', component: MovieComponent },
   // { path: '', redirectTo: 'register', pathMatch: 'full' },
   { path: '**', redirectTo: 'register', pathMatch: 'full' }
 

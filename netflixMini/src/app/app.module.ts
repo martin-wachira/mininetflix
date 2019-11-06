@@ -1,6 +1,7 @@
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from './../environments/environment';
 import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore'
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -8,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 import { AppComponent } from './app.component';
 

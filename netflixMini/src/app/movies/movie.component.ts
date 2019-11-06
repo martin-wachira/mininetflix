@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterService } from './../home/register.service';
-import { MovieService } from './movie.service';
 import { Component, OnInit } from '@angular/core';
 import { IMovie } from './movie';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-movie',
@@ -10,28 +10,25 @@ import { IMovie } from './movie';
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
+
   movie: IMovie;
-  // movieDetails: any;
 
-  constructor(private service: RegisterService, private a_route: ActivatedRoute, private router: Router) { }
-
+  constructor(private service: RegisterService, private a_route: ActivatedRoute) {}
 
   ngOnInit() {
-
-    let param = this.a_route.snapshot.paramMap.get('documentId');
+    let param = this.a_route.snapshot.paramMap.get('id');
     if (param){
-      const documentId = +param;
-      this.getMovie(documentId);
+      const id = param;
+      this.getMovie(id);
     }
-    
+
   }
 
-  getMovie(documentId: number) {
-    this.service.getMovie(documentId).subscribe({
-      next: movie => this.movie = movie
-      // error: err => this.errorMessage = err
+  getMovie(id: string) {
+    this.service.getMovie(id).subscribe({
+      next: movie => this.movie = movie,
     });
   }
 
-
+  
 }

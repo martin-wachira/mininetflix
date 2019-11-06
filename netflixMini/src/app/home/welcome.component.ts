@@ -6,20 +6,6 @@ import { IMovie } from '../movies/movie';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 
-function passMatch(c: AbstractControl): { [key: string]: boolean } | null {
-  const passwordControl = c.get('password');
-  const confirmControl = c.get('cnfpass');
-
-  if (passwordControl.pristine || confirmControl.pristine) {
-    return null;
-  }
-
-  if (passwordControl.value === confirmControl.value) {
-    return null;
-  }
-  return { match: true };
-}
-
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -31,22 +17,13 @@ export class WelcomeComponent implements OnInit {
   validatingForm: FormGroup;
   passMessage: string;
   showLike: boolean = false;
+  searchText = '';
 
   errorMessage = '';
 
-  // _listFilter: string;
-  // get listFilter(): string {
-  //   return this._listFilter;
-  // }
-
-  // set listFilter(value: string) {
-  //   this._listFilter = value;
-  //   this.filteredMovies = this.listFilter ? this.performFilter(this.listFilter) : this.movies;
-  // }
-
-  // filteredMovies: IMovie[];
-  movies: IMovie[] = [];
-  movieDetails: any;
+  movies: IMovie[];
+  curMovie: IMovie;
+  editState: boolean = false;
 
   private validationMessages = {
     required: 'Please enter your password.',
@@ -58,11 +35,6 @@ export class WelcomeComponent implements OnInit {
     private a_route: ActivatedRoute,
     private db: AngularFirestore) {}
 
-  // performFilter(filterBy: string): IMovie[] {
-  //   filterBy = filterBy.toLocaleLowerCase();
-  //   return this.movies.filter((movie: IMovie) =>
-  //     movie.title.toLocaleLowerCase().indexOf(filterBy) !== 0);
-  // }
 
   ngOnInit() {
     this.validatingForm = this.fb.group({
@@ -71,15 +43,24 @@ export class WelcomeComponent implements OnInit {
       password: ['', Validators.required]
     });
     
-    this.service.getAllMovies()
-    .subscribe(data => {
-      this.movies = data.map(e => {
-        return {
-          ...e.payload.doc.data()
-        } as IMovie;
-      })
+    // this.service.getAllMovies()
+    // .subscribe(data => {
+    //   this.movies = data.map(e => {
+    //     return {
+    //       ...e.payload.doc.data()
+    //     } as IMovie;
+    //   })
+    // })
+
+    this.service.getAllMovies().subscribe(movies => {
+      // console.log(movies);
+      this.movies = movies;
     })
 
+  }
+
+  gotoDetails(id){
+    this.router.navigate(['/movie', id]);
   }
 
   setMessage(c: AbstractControl): void {

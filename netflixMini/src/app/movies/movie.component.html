@@ -24,21 +24,13 @@
 
     <!--Section heading-->
     <h2 style="color:green;" class="h1 py-5 font-weight-bold text-center">{{movie.title}}</h2>
-    <!--Section description-->
-    <p class="px-5 mb-5 pb-3 lead grey-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-        sed do
-        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        Ut enim ad minim veniam.</p>
-        
-        <p>{{movie.author}}</p>
-        <p>{{movie.description}}</p>
-
+    
     <!--Grid row-->
     <div class="row pt-2">
 
         <!--Grid column-->
         <div class="col-lg-5 text-center text-lg-left">
-            <img src="https://mdbootstrap.com/img/Photos/Others/screens-section.jpg" alt="" class="img-fluid z-depth-0">
+            <img [src]='movie.imgUrl' alt="" class="img-fluid z-depth-0">
         </div>
         <!--Grid column-->
 
@@ -47,45 +39,44 @@
 
             <!--Grid row-->
             <div class="row pb-3">
-                <div class="col-2 col-md-1">
-                    <mdb-icon fas icon="reply" size="lg" class="indigo-text"></mdb-icon>
+                <div class="col-10"  *ngIf="movie.author">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Author</h5>
+                    <p class="grey-text text-left">{{movie.author}}</p>
                 </div>
-                <div class="col-10">
-                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Safety</h5>
-                    <p class="grey-text text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Reprehenderit
-                        maiores nam, aperiam minima assumenda
-                        deleniti hic.</p>
-                </div>
-            </div>
-            <!--Grid row-->
 
-            <!--Grid row-->
-            <div class="row pb-3">
-                <div class="col-2 col-md-1">
-                    <mdb-icon fas icon="reply" size="lg" class="indigo-text"></mdb-icon>
+                <div class="col-10"  *ngIf="movie.director">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Author</h5>
+                    <p class="grey-text text-left">{{movie.director}}</p>
                 </div>
-                <div class="col-10">
-                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Technology</h5>
-                    <p class="grey-text text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Reprehenderit
-                        maiores nam, aperiam minima assumenda
-                        deleniti hic.</p>
-                </div>
-            </div>
-            <!--Grid row-->
 
-            <!--Grid row-->
-            <div class="row pb-3">
-                <div class="col-2 col-md-1">
-                    <mdb-icon fas icon="reply" size="lg" class="indigo-text"></mdb-icon>
+                <div class="col-10" *ngIf="movie.description">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Description</h5>
+                    <p class="grey-text text-left">{{movie.description}}</p>
                 </div>
-                <div class="col-10">
-                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Finance</h5>
-                    <p class="grey-text text-left">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Reprehenderit
-                        maiores nam, aperiam minima assumenda
-                        deleniti hic.</p>
+                
+                <div class="col-10"  *ngIf="movie.plot">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Plot</h5>
+                    <p class="grey-text text-left">{{movie.plot}}</p>
+                </div>
+
+                <div class="col-10"  *ngIf="movie.genre">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Genre</h5>
+                    <p class="grey-text text-left">{{movie.genre}}</p>
+                </div>
+
+                <div class="col-10"  *ngIf="movie.releaseDate">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Release Date</h5>
+                    <p class="grey-text text-left">{{movie.releaseDate}}</p>
+                </div>
+                
+                <div class="col-10"  *ngIf="movie.award">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Awards</h5>
+                    <p class="grey-text text-left">{{movie.award}}</p>
+                </div>
+
+                <div class="col-10" *ngIf="movie.rating">
+                    <h5 class="font-weight-bold text-left mb-3 dark-grey-text">Rating</h5>
+                    <p class="grey-text text-left">{{movie.rating}}</p>
                 </div>
             </div>
             <!--Grid row-->

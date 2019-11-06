@@ -1,30 +1,15 @@
 
-// export class Movie{
-//    Id: number;
-//    title: string;
-//    author: string;
-//    director: string;
-//    awards: number;
-//    language: string;
-//    genre: string;
-//    plot: string;
-//    releaseDate: string;
-//    description: string; 
-//    rating: number;
-//    imageUrl: string;
-// }
-export interface IMovie{
-  data: any;
-   documentId: number;
-   title: string;
-   author: string;
-   director: string;
-   awards: number;
-   language: string;
-   genre: string;
-   plot: string;
-   releaseDate: string;
-   description: string; 
-   rating: number;
-   imgUrl: string;
+export interface IMovie {
+  id?: string;
+  title?: string;
+  author?: string;
+  director?: string;
+  award?: string;
+  language?: string;
+  genre?: string;
+  plot?: string;
+  releaseDate?: string;
+  description?: string;
+  rating?: string;
+  imgUrl?: string;
 }

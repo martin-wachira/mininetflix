@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs';
 import { IMovie } from './../movies/movie';
 import { catchError, tap, map } from 'rxjs/operators';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 
 @Injectable({
@@ -11,35 +11,94 @@ import { AngularFireList, AngularFireDatabase } from '@angular/fire/database';
 })
 export class RegisterService {
 
-  private dbPath = '/movies';
-  moviesRef: AngularFireList<IMovie> = null;
+  // private dbPath = '/movies';
+  // moviesRef: AngularFireList<IMovie> = null;
+
+  movieCollection: AngularFirestoreCollection<IMovie>;
+  movies: Observable<IMovie[]>;
+  movieDoc: AngularFirestoreDocument<IMovie>;
+
+  // movie: IMovie = {
+  //   id: '',
+  //   title: '',
+  //   author: '',
+  //   director: '',
+  //   awards: '',
+  //   language: '',
+  //   genre: '',
+  //   plot: '',
+  //   releaseDate: '',
+  //   description: '',
+  //   rating: '',
+  //   imgUrl: ''
+  // }
 
   constructor(private http: HttpClient, public fs: AngularFirestore, private db: AngularFireDatabase) {
-    this.moviesRef = db.list(this.dbPath);
-   }
+    // this.moviesRef = db.list(this.dbPath);
 
+    this.movieCollection = this.fs.collection('movies', ref => ref.orderBy('title', 'asc'));
 
-  getAllMovies(): Observable<any>{
-    return this.fs.collection('movies').snapshotChanges();
+    this.movies = this.movieCollection.snapshotChanges().pipe(map(changes => {
+      return changes.map(a => {
+        const data = a.payload.doc.data() as IMovie;
+        data.id = a.payload.doc.id;
+        return data;
+      });
+    }));
   }
 
-  // getMovie = (documentId: number) => {
-  //   return this.fs.collection('movies').doc().get();//..snapshotChanges();
-  //  } 
-  
-  getMovie(documentId: number): Observable<IMovie | undefined>{
+
+  // getAllMovies(): Observable<any>{
+  //   return this.fs.collection('movies').snapshotChanges();
+  // }
+
+
+  getAllMovies() {
+    return this.movies;
+  }
+
+  getMovie(id: string): Observable<IMovie | undefined>{
     return this.getAllMovies()
     .pipe(
-        map((movies: IMovie[]) => movies.find(m => m.documentId === documentId))
+        map((movies: IMovie[]) => movies.find(m => m.id === id))
     );
   }
 
+  // getMovie(id: IMovie) {
+  //   this.movieDoc = this.fs.doc(`movies/${id}`);
+  //   // this.movieDoc.update(movie);
+  // }
 
-  private handleError(err: HttpErrorResponse){
+
+  // getMovie(id: string) {
+  //   const mov = this.fs.collection<IMovie[]>('movies');
+  //   return mov.valueChanges()
+  //   // return this.getAllMovies()
+  //   .pipe(
+  //     map((mov) => {
+  //       return mov.find(mo => mo.id === id);
+  //     })
+  //   )
+  // }
+
+  // getMovie = (id: string) => {
+  //   return this.fs.collection(this.dbPath).snapshotChanges();//..snapshotChanges();
+  //  } 
+
+  // getMovie(title: string): Observable<IMovie>{
+  //   return this.http.get(this.dbPath)
+  //   .pipe(
+  //       map((response) => 
+  //       <IMovie>response)
+  //   );
+  // }
+
+
+  private handleError(err: HttpErrorResponse) {
     let errorMessage = '';
-    if(err.error instanceof ErrorEvent){
+    if (err.error instanceof ErrorEvent) {
       errorMessage = `An Error Occurred: ${err.error.message}`;
-    }else{
+    } else {
       errorMessage = `Server Returned code: ${err.status}, error message is: ${err.message}`;
     }
     console.error(errorMessage);
@@ -64,10 +123,7 @@ export class RegisterService {
       observe: 'body',
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
-    
+
   }
 
-  // likeMovie(item){
-  //   this.favItem.push(item);
-  // }
 }
