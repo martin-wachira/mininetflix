@@ -12,6 +12,10 @@ import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestor
 })
 
 export class WelcomeComponent implements OnInit {
+
+  email: string;
+  password: string;
+  
   successMessage = '';
   validatingForm: FormGroup;
   passMessage: string;
@@ -23,6 +27,9 @@ export class WelcomeComponent implements OnInit {
   movies: IMovie[];
   curMovie: IMovie;
   editState: boolean = false;
+  movie = '';
+
+  authError: any;
 
   private validationMessages = {
     required: 'Please enter your password.',
@@ -32,7 +39,7 @@ export class WelcomeComponent implements OnInit {
     private service: RegisterService,
     private router: Router,
     private a_route: ActivatedRoute,
-    private db: AngularFirestore) {}
+    private db: AngularFirestore,) {}
 
 
   ngOnInit() {
@@ -47,10 +54,18 @@ export class WelcomeComponent implements OnInit {
       this.movies = movies;
     })
 
+    this.service.eventAuthError$.subscribe(data => {
+      this.authError = data;
+    })
+
   }
 
   gotoDetails(id){
     this.router.navigate(['/movie', id]);
+  }
+
+  gotoFav(id) {
+    this.router.navigate(['/favorite', id]);
   }
 
   setMessage(c: AbstractControl): void {
@@ -65,35 +80,41 @@ export class WelcomeComponent implements OnInit {
     this.showLike = !this.showLike; 
   }
 
-  register() {
-    console.log(this.validatingForm.value);
+  // register() {
+  //   console.log(this.validatingForm.value);
 
-    if (this.validatingForm.valid) {
-      this.service.submitRegister(this.validatingForm.value)
-        .subscribe(
-          data => this.successMessage = 'Registration Successfuly',
-          error => this.successMessage = 'Some errors'
-        );
-    }
-  }
+  //   if (this.validatingForm.valid) {
+  //     this.service.submitRegister(this.validatingForm.value)
+  //       .subscribe(
+  //         data => this.successMessage = 'Registration Successfuly',
+  //         error => this.successMessage = 'Some errors'
+  //       );
+  //   }
+  // }
+
+  // createUser(frm){
+  //   this.service.createUser(frm.value)
+  // }
 
   moveToLogin() {
     this.router.navigate(['../login'], { relativeTo: this.a_route });
   }
 
-  gotoFav() {
-    this.router.navigate(['../favorite'], { relativeTo: this.a_route });
-  }
+  // get username() {
+  //   return this.validatingForm.get('username');
+  // }
 
-  get username() {
-    return this.validatingForm.get('username');
-  }
+  // get email() {
+  //   return this.validatingForm.get('email');
+  // }
 
-  get email() {
-    return this.validatingForm.get('email');
-  }
+  // get password() {
+  //   return this.validatingForm.get('password');
+  // }
 
-  get password() {
-    return this.validatingForm.get('password');
+
+  signup() {
+    this.service.signup(this.email, this.password);
+    this.email = this.password = '';
   }
 }

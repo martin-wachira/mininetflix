@@ -3,12 +3,13 @@
 
     <!-- Navbar brand -->
     <a class="navbar-brand">
-        <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix logo">
+        <img src="/assets/images/netflix.jpg" height="120" class="d-inline-block align-top" alt="mini_netflix_logo">
     </a>
     <div class="row">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <button mdbBtn type="button" color="danger" rounded="true" (click)="gotoFav()">Favorites</button>
+                <button mdbBtn type="button" color="danger" rounded="true"
+                    [routerLink]="[ '/favorite']">Favorites</button>
             </li>
 
             &nbsp; &nbsp;
@@ -49,7 +50,57 @@
                             <div class="modal-body mx-4">
                                 <!--Body-->
 
-                                <form [formGroup]="validatingForm">
+                                <form>
+                                    <!-- <div class="md-form form-sm">
+                                        <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
+                                        <input style="color: rgb(126, 93, 93)" type="text" id="Form-username1"
+                                          name="username" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-username1">Username</label>
+                                        <mdb-error *ngIf="username.invalid && (username.dirty || username.touched)">
+                                            Input invalid
+                                        </mdb-error>
+                                    </div> -->
+
+
+                                    <div class="md-form form-sm">
+                                        <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+                                        <input type="email" style="color: rgb(126, 93, 93)" id="Form-email1"
+                                           [(ngModel)]="email" name="email" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-email1">Email</label>
+                                        <!-- <mdb-error *ngIf="email.invalid && (email.dirty || email.touched)">
+                                            Input invalid
+                                        </mdb-error> -->
+
+                                    </div>
+
+                                    <div class="md-form form-sm">
+                                        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+                                        <input type="password" style="color: rgb(126, 93, 93)" id="Form-pass1"
+                                        [(ngModel)]="password" name="password" class="form-control" mdbInput mdbValidate>
+                                        <label for="Form-pass1">Your password</label>
+                                        <!-- <mdb-error *ngIf="password.invalid && (password.dirty || password.touched)">
+                                            Input invalid
+                                        </mdb-error> -->
+
+                                    </div>
+
+                                    <div class="md-form form-sm">
+
+                                        <mdb-success>
+                                            {{successMessage}}
+                                        </mdb-success>
+                                    </div>
+
+                                    <div class="text-center mb-3">
+                                        <button type="button" mdbBtn gradient="blue" block="true" rounded="true"
+                                            class="z-depth-1a waves-light" mdbWavesEffect color="success"
+                                            type="submit" (click)="signup()">Sign up
+                                        </button>
+                                    </div>
+
+                                </form>
+
+                                <!-- <form #userForm="ngForm" (ngSubmit) = "createUser(userForm)">
                                     <div class="md-form form-sm">
                                         <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
                                         <input style="color: rgb(126, 93, 93)" type="text" id="Form-username1"
@@ -58,9 +109,6 @@
                                         <mdb-error *ngIf="username.invalid && (username.dirty || username.touched)">
                                             Input invalid
                                         </mdb-error>
-                                        <!-- <mdb-success *ngIf="username.valid && (username.dirty || username.touched)">
-                                        Input valid
-                                    </mdb-success> -->
                                     </div>
 
 
@@ -86,21 +134,6 @@
 
                                     </div>
 
-                                    <!-- <div class="md-form form-sm">
-                                        <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
-                                        <input type="password" style="color: rgb(126, 93, 93)" formControlName="cnfpass" class="form-control" mdbInput mdbValidate>
-                                        <label for="form23">Confirm</label>
-                                        <mdb-error>
-                                            Input invalid
-                                        </mdb-error>
-                                        <mdb-success *ngIf="cnfpass.valid && (cnfpass.dirty || cnfpass.touched)">
-                                            Input valid
-                                        </mdb-success>
-                                        <p class="font-small blue-text d-flex justify-content-end">Forgot
-                                            <a href="#" class="blue-text ml-1"> Password?</a>
-                                        </p>
-                                </div> -->
-
                                     <div class="md-form form-sm">
 
                                         <mdb-success>
@@ -111,11 +144,11 @@
                                     <div class="text-center mb-3">
                                         <button type="button" mdbBtn gradient="blue" block="true" rounded="true"
                                             class="z-depth-1a waves-light" mdbWavesEffect color="success"
-                                            (click)="register()">Sign up
+                                            type="submit">Sign up
                                         </button>
                                     </div>
 
-                                </form>
+                                </form> -->
 
 
                                 <p class="font-small dark-grey-text text-right d-flex justify-content-center mb-3 pt-2">
@@ -172,7 +205,7 @@
                     <div class="mask rgba-black-slight"></div>
                 </a>
             </div>
-            
+
 
             <mdb-card-body cascade="true" class="text-center">
                 <!--Card content-->
@@ -185,7 +218,7 @@
                 </h5>
 
                 <mdb-card-text>
-                
+
                     <ul>
                         <li>
                             {{movie.title}}
@@ -199,8 +232,8 @@
                     </ul>
                 </mdb-card-text>
 
-                <button mdbBtn type="button" color="danger" rounded="true" (click)="toggleLike()">
-                    {{showLike ? 'Like' : 'Like'}}
+                <button mdbBtn type="button" color="danger" rounded="true" (click)="gotoFav(movie.id)">
+                   LIKE
                 </button>
 
             </mdb-card-body>
@@ -209,4 +242,5 @@
         </mdb-card>
         <!--/.Card-->
     </div>
-</div>
+
+    <div class="class1"></div>

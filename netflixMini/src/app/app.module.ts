@@ -17,6 +17,7 @@ import { MovieComponent } from './movies/movie.component';
 import { LoginComponent } from './login/login.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { FilterPipe } from './movies/filter.pipe';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 
 
@@ -40,7 +41,8 @@ import { FilterPipe } from './movies/filter.pipe';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

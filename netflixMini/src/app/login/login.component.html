@@ -24,20 +24,20 @@
         <mdb-card-body class="px-lg-5 pt-0">
       
           <!-- Form -->
-          <form class="text-center" [formGroup]="loginForm">
+          <!-- <form class="text-center" > -->
       
             <!-- Email -->
             <div class="md-form">
-              <input type="email" id="materialLoginFormEmail" class="form-control" formControlName="email" mdbInput>
+              <input type="email" id="materialLoginFormEmail" class="form-control" [(ngModel)]="email" mdbInput>
               <label for="materialLoginFormEmail">E-mail</label>
-              <mdb-error *ngIf="isValid('email')">Email cannot be blank</mdb-error>
+              <!-- <mdb-error *ngIf="isValid('email')">Email cannot be blank</mdb-error> -->
             </div>
       
             <!-- Password -->
             <div class="md-form">
-              <input type="password" id="materialLoginFormPassword" class="form-control" formControlName="password" mdbInput>
+              <input type="password" id="materialLoginFormPassword" class="form-control" [(ngModel)]="password" mdbInput>
               <label for="materialLoginFormPassword">Password</label>
-              <mdb-error *ngIf="isValid('password')">Password cannot be blank</mdb-error>
+              <!-- <mdb-error *ngIf="isValid('password')">Password cannot be blank</mdb-error> -->
             </div>
 
             
@@ -54,7 +54,7 @@
       
             <!-- Sign in button -->
             <button mdbBtn color="info" outline="true" rounded="true" block="true" class="my-4 waves-effect z-depth-0" mdbWavesEffect
-              type="submit" (click)="login()">Sign in</button>
+               (click)="login()">Sign in</button>
       
             <!-- Register -->
             <p>Not a member?
@@ -76,7 +76,7 @@
               <mdb-icon fab icon="github"></mdb-icon>
             </a>
       
-          </form>
+          <!-- </form> -->
           <!-- Form -->
       
         </mdb-card-body>

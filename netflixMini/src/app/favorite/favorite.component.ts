@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IMovie } from '../movies/movie';
 
 @Component({
   selector: 'app-favorite',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteComponent implements OnInit {
   searchText='';
+  movies: IMovie[];
 
   constructor() { }
 
